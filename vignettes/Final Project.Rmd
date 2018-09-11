@@ -1,0 +1,54 @@
+---
+title: "Final Project"
+author: "Zacharias Flouris"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This objective of this package is to affiliate users of NOOA datasets at working with earthquake. The content of the package performs a set of basic of functions that render the cleaning of the data and the basic visualizations easy.
+
+Here is an example. We first clean the data:
+
+```{r clean }
+eq <- eq_clean_data(data)
+eq <- eq_location_clean(eq)
+
+```
+
+And then first draw the timeline:
+
+```{r timeline}
+ggplot(data=eq %>% 
+         filter((COUNTRY %in% c("GREECE", "ITALY")) & 
+                  year(DATE)>1981)) + 
+geom_timeline(aes(x=DATE, y =COUNTRY ,size = INTENSITY,
+                  color = DEATHS))+
+geom_timeline_label(aes(label = LOCATION_NAME, x=DATE,size = INTENSITY,
+                        y =COUNTRY),n_max=4)+
+theme(panel.grid = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.title.y = element_blank(),
+        panel.background = element_blank(),
+        legend.position = "bottom")
+```
+
+and then the map:  
+
+```{r map}
+eq %>% 
+  filter((COUNTRY %in% c("GREECE")) & year(DATE)>1981) %>%
+  eq_map(annot_col = "DEATHS")
+```
+
+and the map with fancier labels:
+
+```{r map2}
+eq %>% mutate(popup_text = eq_create_label(.)) %>% 
+  eq_map(annot_col = "popup_text")
+```
+
+

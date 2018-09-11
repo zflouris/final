@@ -1,0 +1,13 @@
+Package: final
+Title: I allows us to work with earthquake data
+Version: 0.0.0.9000
+Authors@R: person("Zacharias", "Flouris")
+Description: The pachage allows us to work with earthquake data downloaded 
+from NOOA website. It has functions for cleaning the data, creating a 
+timeline of the earthquakes, putting labels into the timeline and creating a 
+map with all the places where a earthquake took place. 
+Depends: R (>= 3.4.4)
+License: CC0
+Encoding: UTF-8
+LazyData: false
+RoxygenNote: 6.0.1
