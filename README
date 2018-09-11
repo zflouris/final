@@ -1,0 +1,3 @@
+This is a package that allows the user to work with earthquake data. 
+It enables to clean the NOOA data, draw a simple timeline of all the earthquakes, 
+and create an interactive map with all of them.
